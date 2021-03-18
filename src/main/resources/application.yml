@@ -3,6 +3,7 @@ spring:
   profiles:
     active: dev
 
+
 mybatis:
   type-aliases-package: com.jonesun.mybatis.entity
   mapper-locations: classpath*:mapper/**/*.xml
@@ -11,3 +12,10 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 开启驼峰命名
     map-underscore-to-camel-case: true
+
+server:
+  servlet:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
