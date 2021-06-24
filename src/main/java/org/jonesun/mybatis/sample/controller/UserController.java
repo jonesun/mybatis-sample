@@ -42,4 +42,9 @@ public class UserController {
         return userService.selectList();
     }
 
+    @GetMapping
+    public String index() {
+        return "hello";
+    }
+
 }

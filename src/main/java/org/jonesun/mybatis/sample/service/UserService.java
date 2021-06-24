@@ -27,23 +27,20 @@ public class UserService {
 
     public boolean insert(UserForm userForm) {
         User user = new User(userForm.getName(), userForm.getAge(), userForm.getEmail());
-        if(userDao.insert(user) > 0) {
-            return true;
-        }
+        return userDao.insert(user) > 0;
+    }
+
+    public boolean deleteById(Serializable id) {
         return false;
     }
 
-//    public boolean deleteById(Serializable id) {
-//        return false;
-//    }
-//
-//    public boolean updateById(User user) {
-//        return false;
-//    }
-//
-//    public User selectById(Serializable id) {
-//        return null;
-//    }
+    public boolean updateById(User user) {
+        return false;
+    }
+
+    public User selectById(Serializable id) {
+        return null;
+    }
 
     public List<User> selectList() {
         return userDao.selectList();
