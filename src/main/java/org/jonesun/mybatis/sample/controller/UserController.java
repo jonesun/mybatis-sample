@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping
     public String index() {
-        return "hello";
+        return "hello world";
     }
 
 }
