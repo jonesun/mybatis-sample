@@ -7,15 +7,41 @@ spring:
   # h2配置(日常开发改为mysql配置即可)
   datasource:
     driver-class-name: org.h2.Driver
-    schema: classpath:db/schema-h2.sql
-    data: classpath:db/data-h2.sql
-    url: jdbc:h2:mem:test
+#    schema: classpath:db/schema-h2.sql
+#    data: classpath:db/data-h2.sql
+    url: jdbc:h2:file:./mydb;AUTO_SERVER=TRUE;MODE=MySQL;
+#    url: jdbc:h2:mem:test
     username: root
     password: test
   h2:
     console:
       enabled: true
       path: /console
+  # flyway 配置
+  flyway:
+    # 启用或禁用 flyway 正式环境才开启
+    enabled: true
+    # 禁用数据库清理 flyway 的 clean 命令会删除指定 schema 下的所有 table, 生产务必禁掉
+    clean-disabled: true
+    # SQL 脚本的目录,多个路径使用逗号分隔 默认值 classpath:db/migration
+    locations: classpath:db/migration
+    #  metadata 版本控制信息表 默认 flyway_schema_history,建议后缀指定为当前项目名称
+    table: flyway_schema_history_mybatis_sample
+    # 如果没有 flyway_schema_history 这个 metadata 表， 在执行 flyway migrate 命令之前, 必须先执行 flyway baseline 命令
+    # 设置为 true 后 flyway 将在需要 baseline 的时候, 自动执行一次 baseline。 针对非空数据库是否默认调用基线版本,为空的话默认会调用基线版本
+    baseline-on-migrate: true
+    # 指定 baseline 的版本号,默认值为 1, 低于该版本号的 SQL 文件, migrate 时会被忽略
+    baseline-version: 1
+    # 字符编码 默认 UTF-8
+    encoding: UTF-8
+    # 是否允许不按顺序迁移 开发建议 true  生产建议 false
+    out-of-order: false
+    # 需要 flyway 管控的 schema list,这里我们配置为flyway  缺省的话, 使用spring.datasource.url 配置的那个 schema,
+    # 可以指定多个schema, 但仅会在第一个schema下建立 metadata 表, 也仅在第一个schema应用migration sql 脚本.
+    # 但flyway Clean 命令会依次在这些schema下都执行一遍. 所以 确保生产 spring.flyway.clean-disabled 为 true
+#    schemas: flyway
+    # 执行迁移时是否自动调用验证   当你的 版本不符合逻辑 比如 你先执行了 DML 而没有 对应的DDL 会抛出异常
+    validate-on-migrate: true
 
 #  日志输出级别 这边改为自己项目的包名
 logging:
