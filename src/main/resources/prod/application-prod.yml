@@ -7,10 +7,7 @@ spring:
   # h2配置(日常开发改为mysql配置即可)
   datasource:
     driver-class-name: org.h2.Driver
-#    schema: classpath:db/schema-h2.sql
-#    data: classpath:db/data-h2.sql
     url: jdbc:h2:file:./mydb;AUTO_SERVER=TRUE;MODE=MySQL;
-#    url: jdbc:h2:mem:test
     username: root
     password: test
   h2:
@@ -52,4 +49,4 @@ logging:
           sample:
             dao: debug
 server:
-  port: 8081
+  port: 8082

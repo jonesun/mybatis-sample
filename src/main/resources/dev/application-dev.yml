@@ -1,0 +1,31 @@
+
+# 应用名称
+spring:
+
+  application:
+    name: mybatis-sample-dev
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
+    url: jdbc:h2:mem:test
+    username: root
+    password: test
+  h2:
+    console:
+      enabled: true
+      path: /console
+  # flyway 配置
+  flyway:
+    enabled: false
+
+#  日志输出级别 这边改为自己项目的包名
+logging:
+  level:
+    org:
+      jonesun:
+        mybatis:
+          sample:
+            dao: debug
+server:
+  port: 8081
